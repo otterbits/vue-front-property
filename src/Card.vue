@@ -11,8 +11,10 @@ export default {
     name : "Card",
     props : {
         원룸 : Object,
-    }
+        
+    },
 }
+
 </script>
 
 <style>
