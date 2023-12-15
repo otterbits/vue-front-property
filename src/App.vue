@@ -8,12 +8,12 @@
     <a v-for="작명 in 메뉴들" :key="작명">{{ 작명 }}</a>
   </div>
 
-  <Discount/>
+  <Discount v-if="showDiscount == true"/>
 
   <button @click="strSort()">가나다정렬</button>
   <button @click="priceAscend()">가격오름차순정렬</button>
   <button @click="priceDescend()">가격내름차순정렬</button>
-  <button @click="priceless()">50만원이하</button>
+  <button @click="priceFilter()">50만원이하</button>
   <button @click="sortBack()">되돌리기</button>
 
   
@@ -32,6 +32,7 @@ export default {
   name: 'App',
   data(){
     return {
+      showDiscount : true,
       원룸들오리지널 : [...data],
       누른거 : 0,
       모달창열렸니 : false,
@@ -50,6 +51,7 @@ export default {
         return a.title.localeCompare(b.title);
       })
     },
+    
     priceAscend(){
       this.원룸들.sort(function(a,b){
         return a.price - b.price;
@@ -62,16 +64,15 @@ export default {
       })
     },
 
-    priceless(){
-      const filteredRooms = this.원룸들.filter(function(a){
-        return a.price < 500000;
-          return filteredRooms
-      })
+    priceFilter(){
+      this.원룸들 = this.원룸들.filter((a) => a.price < 500000);
     },
+
     sortBack(){
       this.원룸들 = [...this.원룸들오리지널];
     },
   },
+
   components: {
     Discount : Discount,
     Modal : Modal,

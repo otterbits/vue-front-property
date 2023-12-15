@@ -22,6 +22,12 @@ export default {
         month : 1,
       }
     },
+    beforeUpdate(){
+      if (this.month == 2) {
+        alert('2개월은 안 받는다')
+        return this.month = 3
+      }
+    },
     watch : {
       month(a){
         if (isNaN(a)) {
